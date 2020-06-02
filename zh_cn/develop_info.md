@@ -4,11 +4,10 @@
 
 ## 源码库说明
 
-1. Caster底盘的Github库[在这里](https://github.com/CasterLab/caster_robot)
-
+1. Caster底盘的[代码库](https://github.com/CasterLab/caster_robot)
 2. 注意对于caster_robot和caster_description
-
-3. kinova_ros的Github库[在这里](https://github.com/I-Quotient-Robotics/kinova_ros)
+3. 用于Kinova Gen2系列机械臂的kinova_ros的[代码库](https://github.com/I-Quotient-Robotics/kinova_ros)
+4. 用于Kinova Gen3系列机械臂的ros_kortex的[代码库](https://github.com/Kinovarobotics/ros_kortex)
 
 ## 传感器信息
 
