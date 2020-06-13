@@ -1,15 +1,82 @@
-# 快速启动手册
+# 快速启动手册(外部PC控制)
 
 ## 前期准备
 
 1. 参考《CasterMoma用户手册》，启动机器人
-2. 连接显示器和无线键鼠到Caster地盘上，接口位置参考《CasterMoma用户手册》
+
+2. 参考《CasterMoma用户手册》的接口图，连接HDMI和键鼠
+
+3. 使用如下指令，获取机器人的名称
+
+   ```bash
+   # 获取机器人名称
+   hostname
+   
+   #返回值举例
+   caster-01
+   ```
+
+4. 准备一台装有ROS Melodic的Ubuntu电脑，下文简称**外部PC**
+
+5. 将网线连接到底盘的网口上，并参考[网络配置信息-外部设备设置](network_info.md#外部设备设置)，设置外部PC的IP地址
+
+6. 连接网线后，在外部电脑中开启一个终端，使用PING指令，测试和Caster-PC的网络通信情况
+
+   ```bash
+   # 使用IP地址测试
+   ping 192.168.33.5
+   
+   # 或者使用第3步获取的机器人名称，例如ping caster-01.local
+   ping (机器人名称).local
+   ```
+
+7. 上述指令可以成功执行后，使用终端设置外部PC的**~/.bashrc**文件，让外部PC使用Caster-PC的ROS Master
+
+   ```bash
+   # 获取外部PC的主机名
+   hostname
+   
+   # 设置本机名称，用上指令的返回值替换(hostname)，例如remote-pc.local
+   echo 'export ROS_HOSTNAME="(hostname).local"' >> ~/.bashrc
+   
+   # 设置ROS Master地址，用第3步的返回值替换(机器人名称)，例如caster-01.local
+   echo 'export ROS_MASTER_URI="http://(机器人名称).local:11311"' >> ~/.bashrc
+   ```
+
+8. 完成上述操作后，重新启动外部PC的Terminal，执行如下指令，安装CasterMoma的Desktop包
+
+   ```bash
+   # 安装必要的软件
+   sudo apt install python-wstool python-catkin-tools
+   
+   # 创建Caster Moma的ROS工作空间
+   mkdir -p ~/caster_moma_ws/src
+   cd ~/caster_moma_ws/src
+   wstool init https://raw.githubusercontent.com/CasterLab/caster_moma_rosinstall/master/caster_moma_desktop.rosinstall
+   wstool update	# 此步骤可能会因为网络政策的原因失败，请多试几次
+   
+   # 安装ROS的包依赖，并编译
+   rosdep install --from-paths . --ignore-src -r -y
+   cd ~/caster_moma_ws
+   catkin build
+   
+   # 添加环境依赖
+   source ~/caster_moma_ws/devel/setup.bash
+   echo 'source ~/caster_moma_ws/devel/setup.bash' >> ~/.bashrc
+   ```
 
 ## ROS功能启动
 
-1. 使用`CTRL+ALT+T`启动一个新终端
+1. 从外部PC使用SSH登录到Caster的PC中，IP地址参考[网络配置信息](network_info.md)
 
-2. 根据机械臂形态，在终端中输入如下指令之一，启动CasterMoma的控制程序，此launch文件会启动CasterMoma中所有的执行器和传感器
+   ```bash
+   # 如果机器人的名称为caster-01
+   ssh caster@caster-01.local
+   
+   # 按照提示，输入密码（参考《网络配置信息》）
+   ```
+
+1. 运行如下代码，启动CasterMoma的控制程序，此launch文件会启动CasterMoma中所有的执行器和传感器
 
    ```bash
    # Kinova Gen3手臂
@@ -22,19 +89,17 @@
    roslaunch caster_moma_bringup caster_moma_j2n6s200_bringup.launch
    ```
 
-## 诊断信息和点云信息显示
+2. 此时可以在外部PC中，使用Rviz来查看Caster传感器的信息
 
-1. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，输入如下指令，使用Rviz来查看CasterMoma传感器的信息和点云视图
+   ```bash
+   roslaunch caster_moma_viz display.launch
+   ```
 
-  ```bash
-  roslaunch caster_moma_viz display.launch
-  ```
-
-2. Rviz视图
+3. Rviz视图
 
    <img src="../img/display.png" alt="Rviz" style="zoom:50%;" />
 
-3. 机器人诊断信息视图
+4. 机器人诊断信息视图
 
    <img src="../img/rqt_runtime_monitor.png" alt="rqt_runtime_monitor" style="zoom:60%;" />
 
@@ -52,23 +117,21 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
-2. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，执行如下指令，启动建图
+2. 使用SSH登录Caster-PC，并执行如下指令
 
    ```bash
    roslaunch caster_navigation gmapping.launch
    ```
 
-3. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，运行如下指令，启动建图界面
+3. 在外部PC中，运行如下指令，启动建图界面
 
    ```bash
    roslaunch caster_moma_viz display.launch type:=gmapping
    ```
 
-4. 拔掉HDMI线，清空机器人周围的区域
+4. 参考[手柄控制](quick_start.md#手柄控制)，启动手柄遥控，操控Caster完成地图建立
 
-5. 参考[手柄控制](quick_start.md#手柄控制)，启动手柄遥控，操控Caster完成地图建立
-
-6. 建立完成后，重新接上显示器，开启一个新的终端，输入如下指令保存地图
+5. 使用SSH登录Caster-PC，并执行如下指令保存地图
 
    ```bash
    # 使用map_saver保存地图, 扫描后的地图推荐存放至caster_navigation的map
@@ -83,14 +146,14 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 2. 参考[创建地图](quick_start.md#创建地图)，完成地图创建
 
-3. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，执行如下指令，启动导航功能
+3. 使用SSH登录Caster-PC，并执行如下指令，启动导航功能
 
    ```bash
    # 使用map_file参数指定要加载的地图，例如加载home地图
    roslaunch caster_navigation navigation.launch map_file:=$(rospack find caster_navigation)/map/home.yaml
    ```
 
-4. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，运行Rviz，用来监控机器人状态
+4. 在外部PC中，运行Rviz，用来监控机器人状态
 
    ```bash
    roslaunch caster_moma_viz display.launch type:=navigation
@@ -104,7 +167,7 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
-2. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，根据机械臂型号和需求，选择如下指令启动机械臂的MoveIt控制功能，或仿真（仿真不需要启动Caster的ROS功能）。
+2. 根据机械臂型号和需求，选择如下指令启动机械臂的MoveIt控制功能，或仿真（仿真不需要启动Caster的ROS功能）。
 
    ```bash
    # 6自由度-2指-球关节 机械臂仿真
@@ -125,7 +188,7 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 3. Moveit视图
 
-   <img src="../img/moveit.png" style="zoom:50%;" />
+   <img src="../img/moveit.png" alt="moveit" style="zoom:50%;" />
 
 ## 自动充电功能
 
@@ -133,7 +196,7 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 2. 参考[自动充电原理和配置](auto_charge_description.md#参数配置)，完成对充电桩位置的设定
 
-3. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，运行如下指令，启动自动充电功能
+3. 使用SSH登录Caster-PC，运行如下指令，启动自动充电功能
 
    ```bash
    roslaunch caster_auto_charge auto_charge.launch
