@@ -91,15 +91,15 @@ Caster使用[yocs_cmd_vel_mux](http://wiki.ros.org/yocs_cmd_vel_mux)对多路控
 
 ## 云台控制
 
-`diagnostics` ([diagnostic_msgs/DiagnosticArray](http://docs.ros.org/melodic/api/diagnostic_msgs/html/msg/DiagnosticArray.html))
+pan_tilt_driver_node/pan_tilt_cmd ([pan_tilt_msgs/PanTiltCmd](https://github.com/I-Quotient-Robotics/iqr_pan_tilt/blob/master/pan_tilt_msg/msg/PanTiltCmd.msg))
 
 用于控制Kinect2云台
 
-数值范围：速度0~40，角度范围：-60~60（水平，单位：度），-60~60（俯仰，单位：度）
+数值范围：speed：0~40（速度），ptich：-60~60（水平，单位：度），yaw：-60~60（俯仰，单位：度）
 
 ## 升降控制
 
-caster_robot/body_controller/goal ([std_msgs/Float64](http://docs.ros.org/api/std_msgs/html/msg/Float64.html))
+caster/body_controller/command ([std_msgs/Float64](http://docs.ros.org/api/std_msgs/html/msg/Float64.html))
 
 控制躯体的升降，数值范围0~0.4，单位M
 

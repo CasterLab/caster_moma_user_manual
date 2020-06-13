@@ -48,6 +48,30 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 5. 对于移动操作，只有在按下`安全键`的时候，信号才会被Caster接收到。
 
+## 云台控制
+
+1. 使用如下指令可以控制云台的俯仰
+
+   ```bash
+   # 归零
+   rostopic pub /pan_tilt_driver_node/pan_tilt_cmd pan_tilt_msgs/PanTiltCmd "{yaw:0.0, pitch:0.0, speed:20.0}"
+   
+   # 旋转和俯仰同时动作
+   rostopic pub /paiitilt_driver_node/pan_tilt_cmd pan_tilt_msgs/PanTiltCmd "{yaw:40.0, pitch:40.0, speed:20.0}"
+   ```
+
+## 躯干控制
+
+1. 使用如下指令可以控制躯干的升降
+
+   ```bash
+   # 躯干降到最低位
+   rostopic pub /caster/body_controller/command std_msgs/Float64 "data: 0.0"
+   
+   # 躯干升到最高位
+   rostopic pub /caster/body_controller/command std_msgs/Float64 "data: 0.4"
+   ```
+
 ## 创建地图
 
 1. 参考[ROS功能启动](01-quick_start.md#ROS功能启动)，启动Caster的ROS功能
