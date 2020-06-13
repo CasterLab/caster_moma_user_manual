@@ -9,7 +9,7 @@
 
 ## 电子版手册地址
 
-访问一下地址，可获取更加详细的，包含超链接的文档
+访问以下地址，可获取更加详细的，包含超链接的文档
 
 电子手册：[https://github.com/CasterLab/caster_moma_user_manual](https://github.com/CasterLab/caster_moma_user_manual)
 

@@ -124,7 +124,7 @@
 
 ### Action Subscribed Topics
 
-`dock_action/goal` (caster_msgs/DockActionGoal)
+`dock_action/goal` ([caster_msgs/DockActionGoal](https://github.com/CasterLab/caster_msgs/blob/master/action/Dock.action))
 
 - 通过写入`DockActionGoal.dock`控制自动充电行为，true 为充电， false为推出
 
@@ -134,7 +134,7 @@
 
 ### Action Published Topics
 
-`dock_action/feedback` (caster_msgs/DockActionFeedback)
+`dock_action/feedback` ([caster_msgs/DockActionFeedback](https://github.com/CasterLab/caster_msgs/blob/master/action/Dock.action))
 
 - 返回当前行为的执行状态
 
@@ -142,7 +142,7 @@
 
 - 返回当前Action任务的状态
 
-`dock_action/result` (caster_msgs/DockActionResult)
+`dock_action/result` ([caster_msgs/DockActionResult](https://github.com/CasterLab/caster_msgs/blob/master/action/Dock.action))
 
 - 在行为结束时，通过此topic返回行为执行结果
 
