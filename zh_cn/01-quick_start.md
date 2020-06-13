@@ -40,17 +40,17 @@
 
 ## 手柄控制
 
-Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说明图](joystick_description.md)
+Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说明图](101-joystick_description.md)
 
-1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
+1. 参考[ROS功能启动](01-quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
-4. 根据[手柄按键说明图](joystick_description.md)，操控Caster进行移动
+4. 根据[手柄按键说明图](102-joystick_description.md)，操控Caster进行移动
 
 5. 对于移动操作，只有在按下`安全键`的时候，信号才会被Caster接收到。
 
 ## 创建地图
 
-1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
+1. 参考[ROS功能启动](01-quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
 2. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，执行如下指令，启动建图
 
@@ -66,7 +66,7 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 4. 拔掉HDMI线，清空机器人周围的区域
 
-5. 参考[手柄控制](quick_start.md#手柄控制)，启动手柄遥控，操控Caster完成地图建立
+5. 参考[手柄控制](01-quick_start.md#手柄控制)，启动手柄遥控，操控Caster完成地图建立
 
 6. 建立完成后，重新接上显示器，开启一个新的终端，输入如下指令保存地图
 
@@ -79,9 +79,9 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 ## 定位导航
 
-1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
+1. 参考[ROS功能启动](01-quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
-2. 参考[创建地图](quick_start.md#创建地图)，完成地图创建
+2. 参考[创建地图](01-quick_start.md#创建地图)，完成地图创建
 
 3. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，执行如下指令，启动导航功能
 
@@ -102,7 +102,7 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 ## 使用机械臂
 
-1. 参考[ROS功能启动](quick_start.md#ROS功能启动)，启动Caster的ROS功能
+1. 参考[ROS功能启动](01-quick_start.md#ROS功能启动)，启动Caster的ROS功能
 
 2. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，根据机械臂型号和需求，选择如下指令启动机械臂的MoveIt控制功能，或仿真（仿真不需要启动Caster的ROS功能）。
 
@@ -129,9 +129,9 @@ Caster可以使用手柄进行遥控，具体按键功能参考[手柄按键说�
 
 ## 自动充电功能
 
-1. 参考[定位导航](quick_start.md#定位导航)，启动Caster的定位导航功能，并正确设置Caster在地图中的位置
+1. 参考[定位导航](01-quick_start.md#定位导航)，启动Caster的定位导航功能，并正确设置Caster在地图中的位置
 
-2. 参考[自动充电原理和配置](auto_charge_description.md#参数配置)，完成对充电桩位置的设定
+2. 参考[自动充电原理和配置](03-auto_charge_description.md#参数配置)，完成对充电桩位置的设定
 
 3. 在终端中，使用`CTRL+SHIFT+T`启动一个新终端标签页，运行如下指令，启动自动充电功能
 

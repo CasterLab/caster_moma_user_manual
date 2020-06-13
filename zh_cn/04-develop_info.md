@@ -145,4 +145,4 @@ caster_robot/body_controller/goal ([std_msgs/Float64](http://docs.ros.org/api/st
 
 使用actionlib进行控制，具体使用方式请参考[http://wiki.ros.org/move_base](http://wiki.ros.org/move_base)
 
-自动充电指令，具体使用方式，请参考[自动充电原理与配置](auto_charge_description.md)
+自动充电指令，具体使用方式，请参考[自动充电原理与配置](03-auto_charge_description.md)

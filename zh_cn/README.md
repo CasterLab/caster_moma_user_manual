@@ -15,13 +15,13 @@
 
 ## 目录
 
-1. [快速启动手册](quick_start.md)
-2. [快速启动手册(外部PC控制)](quick_start_remote.md)
-3. [自动充电原理与配置](auto_charge_description.md)
-4. [开发说明](develop_info.md)
+1. [快速启动手册](01-quick_start.md)
+2. [快速启动手册(外部PC控制)](02-quick_start_remote.md)
+3. [自动充电原理与配置](03-auto_charge_description.md)
+4. [开发说明](04-develop_info.md)
 
 ## 附录
 
-1. [网络配置信息](network_info.md)
-2. [手柄按键图](joystick_description.md)
+1. [网络配置信息](101-network_info.md)
+2. [手柄按键图](102-joystick_description.md)
 
